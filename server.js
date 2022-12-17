@@ -11,6 +11,8 @@ app.use(cors());
 
 //handler
 const searchhandler = require('./search/searchmodule');
+const errorHandler = require('./handlers/500');
+const notFoundHandler = require('./handlers/404');
 
 //middleware
 const loggerMiddleware = require('./middlewares/logger');
@@ -21,6 +23,8 @@ app.use(loggerMiddleware);
 //Endpoints
 app.get('/',homehandler)
 app.get("/searchimage",validator,searchhandler.searchhandler);
+app.get("*", notFoundHandler);
+app.use(errorHandler);
 
 
 
